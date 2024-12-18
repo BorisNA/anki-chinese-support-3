@@ -53,7 +53,7 @@ pack:
 	cp -p chinese/data/db/update.py data/db
 	zip -ur $(ZIP_NAME) data/db
 	rm -rf data
-	pipenv run ./convert-readme.py
+	pipenv run python ./convert-readme.py
 
 extract:
 	rm -rf "$(ADDON_PATH)"
