@@ -41,6 +41,7 @@ prep:
 	-mv $(PROJECT_SHORT)/meta.json .
 	-mv $(PROJECT_SHORT)/config_saved.json .
 	cp LICENSE $(PROJECT_SHORT)/LICENSE.txt
+	cp manifest.json $(PROJECT_SHORT)/manifest.json
 	git checkout chinese/data/db/chinese.db
 
 pack:
@@ -61,6 +62,7 @@ extract:
 
 clean:
 	rm $(PROJECT_SHORT)/LICENSE.txt
+	rm $(PROJECT_SHORT)/manifest.json
 	-mv meta.json $(PROJECT_SHORT)/meta.json
 	-mv config_saved.json $(PROJECT_SHORT)/config_saved.json
 	cat chinese/_version.py chinese/config.json Makefile | grep -i 'version[_" ].*[=:]' | tr -cd '[0-9\n]'
