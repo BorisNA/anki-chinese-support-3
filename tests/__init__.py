@@ -22,6 +22,11 @@ from tempfile import mkdtemp
 from unittest import TestCase
 from unittest.mock import MagicMock, patch
 from os import path, pardir
+import os
+import shutil
+import tempfile
+
+from anki.collection import Collection as aopen
 
 network_integration = False
 
@@ -29,14 +34,15 @@ NullTranslations().install()
 
 # FIXME: Find a better solution for this
 modules = {
-    'anki': MagicMock(),
+    # anki is needed for bulk fill
+    # 'anki': MagicMock(),
+    # 'anki.stdmodels': MagicMock(),
+    'anki.template': MagicMock(),
+    # 'anki.notes': MagicMock(),
     'anki.find': MagicMock(),
     'anki.hooks': MagicMock(),
     'anki.lang': MagicMock(),
-    'anki.notes': MagicMock(),
     'anki.stats': MagicMock(),
-    'anki.stdmodels': MagicMock(),
-    'anki.template': MagicMock(),
     'anki.template.hint': MagicMock(),
     'anki.utils': MagicMock(),
     'aqt': MagicMock(),
@@ -68,3 +74,25 @@ class Base(TestCase):
         self.maxDiff = None
         self.logger = getLogger()
         self.logger.setLevel('DEBUG')
+
+## From anki code: pylib/shared/tests.py
+
+# Creating new decks is expensive. Just do it once, and then spin off
+# copies from the master.
+_emptyCol: str | None = None
+
+
+def get_empty_col():
+    global _emptyCol
+    if not _emptyCol:
+        (fd, path) = tempfile.mkstemp(suffix=".anki2")
+        os.close(fd)
+        os.unlink(path)
+        col = aopen(path)
+        col.close(downgrade=False)
+        _emptyCol = path
+    (fd, path) = tempfile.mkstemp(suffix=".anki2")
+    shutil.copy(_emptyCol, path)
+    col = aopen(path)
+    return col
+

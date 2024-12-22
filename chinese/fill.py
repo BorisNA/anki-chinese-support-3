@@ -88,6 +88,13 @@ def bulk_fill_all():
 
     for i, nid in enumerate(note_ids):
         note = mw.col.get_note(nid)
+
+        # Quick fix for Gustaf-C#83, there could be notes without hanzi fields
+        if not get_first(config.get_fields(['hanzi']), dict(note)):
+            # We will skip updating message, but "this is fine" since
+            # messages and progress do not work in the latest anki anyway
+            continue
+
         fields = [
             f
             for f in mw.col.models.field_names(note.note_type())
