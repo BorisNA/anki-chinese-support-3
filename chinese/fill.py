@@ -227,14 +227,13 @@ def bulk_fill_transcript():
                 d_added_pinyin += 1
 
             fill_all_rubies(hanzi, copy)
-            save_note(note, copy)
+            n_updated += save_note(note, copy)
 
     mw.progress.finish()
     msg = '''
-    <b>Processed:</b> %(hanzi)s<br>
+    <b>Bulk filling transcript complete</b><br>
     <b>Filled pinyin:</b> %(pinyin)d notes<br>
     <b>Updated: </b>%(updated)d fields''' % {
-        'hanzi': get_hanzi(copy),
         'pinyin': d_added_pinyin,
         'updated': n_updated,
     }
@@ -296,7 +295,7 @@ def bulk_fill_defs():
             save_note(note, copy)
 
     msg = '''
-    <b>Translation complete</b><br>
+    <b>Bulk filling translation complete</b><br>
     <b>Chinese notes:</b> %(has_fields)d<br>
     <b>Translated:</b> %(filled)d<br>
     <b>Failed:</b> %(failed)d''' % {
@@ -398,12 +397,11 @@ def bulk_fill_hanzi():
             fill_simp(hanzi, copy)
             fill_trad(hanzi, copy)
             fill_color(hanzi, copy)
-            n_updated = save_note(note, copy)
+            n_updated += save_note(note, copy)
 
     msg = '''
-    <b>Update complete!</b> %(hanzi)s<br>
+    <b>Bulk filling hanzi complete</b><br>
     <b>Updated:</b> %(filled)d notes''' % {
-        'hanzi': get_hanzi(copy),
         'filled': n_updated,
     }
     mw.progress.finish()
@@ -438,12 +436,11 @@ def bulk_fill_silhouette():
             mw.progress.update(label=msg, value=i)
             hanzi = get_first(config['fields']['hanzi'], copy)
             fill_silhouette(hanzi, copy)
-            n_updated = save_note(note, copy)
+            n_updated = +save_note(note, copy)
 
     msg = '''
-    <b>Update complete!</b> %(hanzi)s<br>
+    <b>Bulk filling silhouette complete</b><br>
     <b>Updated:</b> %(filled)d notes''' % {
-        'hanzi': get_hanzi(copy),
         'filled': n_updated,
     }
     mw.progress.finish()
