@@ -274,6 +274,13 @@ def bulk_fill_defs():
 
     for i, note_id in enumerate(note_ids):
         note = mw.col.get_note(note_id)
+
+        # Quick fix for Gustaf-C#83, there could be notes without hanzi fields
+        if not get_first(config.get_fields(['hanzi']), dict(note)):
+            # We will skip updating message, but "this is fine" since
+            # messages and progress do not work in the latest anki anyway
+            continue
+
         copy = dict(note)
         hanzi = get_hanzi(copy)
 
@@ -343,6 +350,13 @@ def bulk_fill_classifiers():
     for i, nid in enumerate(note_ids):
         note = mw.col.get_note(nid)
         copy = dict(note)
+
+        # Quick fix for Gustaf-C#83, there could be notes without hanzi fields
+        if not get_first(config.get_fields(['hanzi']), dict(note)):
+            # We will skip updating message, but "this is fine" since
+            # messages and progress do not work in the latest anki anyway
+            continue
+
         hanzi = get_hanzi(copy)
 
         if has_any_field(copy, fields) and hanzi:
@@ -483,6 +497,13 @@ def bulk_fill_usage():
     for i, note_id in enumerate(note_ids):
         note = mw.col.get_note(note_id)
         copy = dict(note)
+
+        # Quick fix for Gustaf-C#83, there could be notes without hanzi fields
+        if not get_first(config.get_fields(['hanzi']), dict(note)):
+            # We will skip updating message, but "this is fine" since
+            # messages and progress do not work in the latest anki anyway
+            continue
+
         hanzi = get_hanzi(copy)
 
         if has_any_field(copy, fields) and hanzi:
