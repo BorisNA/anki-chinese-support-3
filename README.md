@@ -1,5 +1,17 @@
 # Chinese Support 3
 
+This is a [fork](https://github.com/BorisNA/anki-chinese-support-3) of the [Chinese Support 3](https://github.com/Gustaf-C/anki-chinese-support-3) addon, which in turn was also a fork from [original](https://github.com/ttempe/chinese-support-addon) Chinese Support add-on and its [redux version](https://github.com/luoliyan/chinese-support-redux).
+
+Its goal is fixing open bugs and improving Anki 23/24 compatibility. No major changes are planned.
+
+Current release is [0.17.1-RB-1](#0171-RB-1) "reborn". It is not available on the ankiweb, but can be downloaded from [Releases](https://github.com/BorisNA/anki-chinese-support-3/releases) page and installed manually. It is **highly recommended** to disable the old addon before loading the new one. 
+
+Upon install it will try to intelligently load the saved config from the old addon. This action is performed once, on the first run. You can delete `meta.json` in the addon folder to rerun it, but it will revert all changes in the new addon prior to re-importing. 
+
+To uninstall disable it first (see known issues in the [Release](#0171-RB-1) description)
+
+## Chinese Support 3 description (original)
+
 Chinese Support 3 is an Anki 23.10-compatible version of the [original](https://github.com/ttempe/chinese-support-addon) Chinese Support add-on and its [redux version](https://github.com/luoliyan/chinese-support-redux). I have tested it on 2.1.66 which seems to work, no testing has been done on earlier versions though. It offers a number of features that streamline the process of creating flashcards for learning Chinese. Some of the features had stopped working, and after taking my time to get these back going I thought that I might as well publish it for others to use.
 
 Please note that the add-on is still in beta and is sometimes shipped in an unstable state. Please upgrade with each new release and report any issues on GitHub. The automated test suite is a work-in-progress, so I still rely heavily on user reports to supplement my own manual testing.
@@ -78,9 +90,29 @@ If you encounter any issues, the best way to have these addressed is to [raise t
 
 ## Known Issues
 
-Please see the bug tracker on [GitHub](https://github.com/Gustaf-C/anki-chinese-support/issues).
+Please see the bug tracker on [GitHub](https://github.com/BorisNA/anki-chinese-support/issues) and for original add-on on [Upstream GitHub](https://github.com/Gustaf-C/anki-chinese-support/issues).
 
 ## Changelog
+
+### 0.17.1-RB-1
+This is mainly a bugfix release. Get it at [Releases](https://github.com/BorisNA/anki-chinese-support-3/releases) page
+- **Features**
+  - New option `lowercase_ruby` is added to the config. If set to `True` (default), then pinyin will be converted to lowercase when generating rubies. It is useful if you have pre-filled pinyin, especially in sentences or names.
+  - Implemented standard Anki config. Default values are stored in `config.json` and user changes - in `meta.json`. Fixes losing user changes in 'Tools/Addons/Config'
+ 
+- **Bugfixes**
+  - Fix always colorizing uppercase pinyin as tone-5 (Gustaf-C#83) 
+  - Fix crashes if processed deck contains notes without any "hanzi" field (Gustaf-C#83)
+  - Fix crashes if no desk was selected (#4)
+  - Fix incorrect reporting of processed notes (#5)
+
+- **Release known issues**
+  - Bulk operations progress is not shown (changes in Anki 23/24), operations appears to be frozen until it completes (see #6)
+  - No undo on bulk fill and in-editor colorization (see #6)
+  - Dictionary database inside the addon is kept locked, causing errors on addon removal and preventing addon update/uninstall (#8). If you want to uninstall it, disable it first, reload Anki and unistall (or just start it with the Shift key)
+  
+---
+**>> original Chinese Support 3 releases**
 
 ### 0.XX.X
 

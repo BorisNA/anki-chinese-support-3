@@ -21,7 +21,7 @@ from aqt.qt import QDialog, QDialogButtonBox, QLabel, QVBoxLayout
 from ._version import __version__
 
 
-CSR_GITHUB_URL = 'https://github.com/Gustaf-C/anki-chinese-support-3'
+CSR_GITHUB_URL = 'https://github.com/BorisNA/anki-chinese-support-3'
 
 
 def showAbout():
@@ -31,6 +31,7 @@ def showAbout():
     label.setStyleSheet('QLabel { font-size: 14px; }')
 
     contributors = [
+        'Gustaf Carefall',
         'Joseph Lorimer',
         'Alex Griffin',
         'Chris Hatch',
@@ -42,11 +43,11 @@ def showAbout():
     text = '''
 <div style="font-weight: bold">Chinese Support 3 v%s</div><br>
 <div><span style="font-weight: bold">
-    Maintainer</span>: Gustaf Carefall</div>
+    Maintainer</span>: BorisNA</div>
 <div><span style="font-weight: bold">Contributors</span>: %s</div>
 <div><span style="font-weight: bold">Website</span>: <a href="%s">%s</a></div>
 <div style="font-size: 12px">
-    <br>Based on the Chinese Support add-on by Thomas Tempé and many others.
+    <br>Based on the Chinese Support 3 add-on by Gustaf Carefall, Chinese Support add-on by Thomas Tempé and many others.
     <br>If your name is missing from here, please open an issue on GitHub.
 </div>
 ''' % (__version__, ', '.join(contributors), CSR_GITHUB_URL, CSR_GITHUB_URL)

@@ -15,10 +15,10 @@
 
 PROJECT_SHORT = chinese
 PROJECT_LONG = chinese-support-3
-VERSION = 0.17.1
+VERSION = 0.17.1-RB-1
 XDG_DATA_HOME ?= C:/_MyDocs/proj/anki
 ADDON_PATH = "$(XDG_DATA_HOME)/Anki2/addons21/$(PROJECT_LONG)"
-ZIP_NAME = $(PROJECT_LONG).ankiaddon
+ZIP_NAME = $(PROJECT_LONG)-RB.ankiaddon
 
 all: test prep pack clean
 
